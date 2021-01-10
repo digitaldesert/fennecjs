@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Welcome - FennecJS</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet/less" type="text/css" href="../themes/default/style.less">
+  <script src="//cdn.jsdelivr.net/npm/less@3.13" ></script>
+ 
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../themes/default/images/favicon-16.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="grid-container full">
+      <div>
+        <h4>Basic Page</h4>
+        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="https://acahir.github.io/Barebones/">Barebones documentation</a>.</p>
+      </div>
+      <ul>
+          <li><a href="" data-ext='{ "message": "Link 1"}' class="ext!popup">Lorem, ipsum dolor.</a></li>
+          <li><a href="" data-ext='{ "message": "Link 2"}' class="ext!popup">Pariatur, magni ex?</a></li>
+          <li><a href="" data-ext='{ "message": "Link 3"}' class="ext!popup">Omnis, incidunt sunt!</a></li>
+      </ul>
+    </div>
+  </div>
+
+<!-- End Document
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<template data-ext='{"message": "hello world"}' class="ext!popup">
+  <p>{{ message }}</p>
+</template>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="../src/lib/requirejs/2.3.6/require.min.js" data-main="../src/extension"></script>
+</body>
+</html>
