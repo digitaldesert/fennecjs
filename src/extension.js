@@ -13,13 +13,16 @@ requirejs.config({
         i18n: {
            locale: lang
        }
-   }
+   },
+   paths: {
+    '_': 'lib/lodash/4.17.15/main'
+    }
 });
 
 /* COMPATIBILITY CODEBASES
  ----------------------------- */
 
-require(['dom/stylesheet','tim', 'dom/element'], function( Stylesheet, Template, Element ) 
+require(['dom/stylesheet','dom/element'], function( Stylesheet, Element ) 
 {
     // Lets ensure that all templates are loaded dynamically first
     let templates = document.querySelectorAll('template[class*="ext\!"]'), idx;
@@ -30,26 +33,19 @@ require(['dom/stylesheet','tim', 'dom/element'], function( Stylesheet, Template,
             data = node.hasAttribute('data-ext') ? JSON.parse( node.getAttribute('data-ext') ) : {},
             content = (node.innerHTML.length > 0 ) ? node.innerHTML : "";
         
-        define("template/" + type + "/" + type, [], function()
+        define("template/" + type , ["template/base"], function( Base )
         {
-            let template = content;
-            return {
-                init : function (element) {
-                    let data = element.hasAttribute('data-ext') ? JSON.parse( element.getAttribute('data-ext') ) : {};
-                    console.log( Template(template, data) );
-                }
-            }
+            let template = Base;
+            template.content( content );
+            return template
         });
-        //console.log( Template( content, data ) )
-
-        //alet data = templates[idx];
     }
     // Lets bind the dictionary to the window-object
 
 
     let insertListener = function( event ) {
 		if (
-            event.animationName === "pluginInserted" ||  event.animationName === "gearInserted"
+            event.animationName === "extensionNode" 
         ) {
             //let node = Object.assign( event.target, { i18n: i8n} ),
             let node = event.target,
@@ -57,14 +53,14 @@ require(['dom/stylesheet','tim', 'dom/element'], function( Stylesheet, Template,
                 type = event.animationName === "pluginInserted" ? "plugin" : "gear",
                 name =  Element.getTemplateName( node );
                // id = tagName.substring( tagName.indexOf('-') + 1 );
-               console.log ("template/" + name + "/" + name);
-           require( [ "template/" + name + "/" + name ], function( element ) {
+               console.log ("template/" + name );
+           require( [ "template/" + name  ], function( element ) {
 
                 // Call the init() function when defined (like in wb-xtemplate)
                 // # wb-carousel.js use the global object customElements.define as per the living standard. So it don't need this init call.
-                //if ( element && element.init ) {
-                    element.init( node );
-               //}
+                if ( element && element.handle ) {
+                    element.handle( node );
+               }
 
            }) ;
            //console.log( " "+ type +"inserted on " + tagName );
@@ -78,7 +74,7 @@ require(['dom/stylesheet','tim', 'dom/element'], function( Stylesheet, Template,
 
 	// Add the observer event binding
 	document.head.appendChild(
-		Stylesheet.css("@keyframes pluginInserted  {\nfrom { caret-color: transparent; }\nto { caret-color: auto; }\n}\n\n[class*=\"ext\\!\"] {animation-duration: 0.001s;animation-name: pluginInserted;}\n\n@keyframes gearInserted  {\nfrom { caret-color: transparent; }\nto { caret-color: auto; }\n}\n\n[class*=\"fnc\\:\"] {animation-duration: 0.001s;animation-name: gearInserted;}" )
+		Stylesheet.css("@keyframes extensionNode  {\nfrom { caret-color: transparent; }\nto { caret-color: auto; }\n}\n\n[class*=\"ext\\!\"] {animation-duration: 0.001s;animation-name: extensionNode;}" )
     );
 
     //console.log( "WET 5 lives.. greeting >> " + i8n.greeting );

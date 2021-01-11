@@ -1,4 +1,6 @@
-
+/**
+    Minimistic Template Parser (XSS Safe)
+**/
 (function(name, definition, context) {
     if (typeof module != 'undefined' && module.exports) {
         module.exports = definition();
@@ -7,9 +9,9 @@
     } else {
         context[name] = definition();
     }
-})('tim', function() {
+})('parser', function() {
 
-    var tim = (function(){
+    let parser = (function(){
         "use strict";
 
         var start   = "{{",
@@ -43,6 +45,6 @@
         };
     }());
 
-    return tim;
+    return parser;
 
 }, this);
