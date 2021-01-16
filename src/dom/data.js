@@ -4,7 +4,7 @@
  * @version v1.0
  */
 
-define( ['_!lang'], function( ) {
+define( ['_!isString'], function( _ ) {
     "use strict";
     
     function isURL(str) {
